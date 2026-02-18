@@ -3,6 +3,7 @@
 Minimal Spring Boot API with a health check endpoint.
 
 ## Run locally (Maven)
+
 ```bash
 mvn spring-boot:run
 Open: http://localhost:8080/health

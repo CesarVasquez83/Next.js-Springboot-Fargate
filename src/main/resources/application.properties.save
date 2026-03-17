@@ -2,8 +2,7 @@ spring.application.name=demo
 spring.datasource.url=jdbc:postgresql://localhost:5432/demo
 spring.datasource.username=postgres
 spring.datasource.password=postgres
-spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto=updatespring.datasource.url=jdbc:postgresql://localhost:5432/demo
+spring.datasource.username=postgres
+spring.datasource.password=postgres
 spring.jpa.hibernate.ddl-auto=update
-management.endpoints.web.exposure.include=health,mappings
-management.endpoint.mappings.enabled=true
-server.error.include-message=always

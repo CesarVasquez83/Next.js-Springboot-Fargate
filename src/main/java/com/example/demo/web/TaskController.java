@@ -7,10 +7,11 @@ import com.example.demo.web.dto.TaskResponse;
 import com.example.demo.web.dto.TaskUpdateRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;   // incluye CrossOrigin
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")              // ← HABILITA CORS PARA TODO EL CONTROLADOR
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {

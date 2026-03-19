@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main ]  
 
 jobs:
   build-and-test:
@@ -49,8 +49,7 @@ jobs:
           exit 1
 
       - name: Build & test backend
-        run: |
-          ./mvnw -q -DskipTests=false test
+        run: mvn -q -DskipTests=false test
         working-directory: .
 
       - name: Set up Node

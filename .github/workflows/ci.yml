@@ -66,16 +66,51 @@ jobs:
         working-directory: ./demo-frontend
 
   docker-build:
-    runs-on: ubuntu-latest
+    
+    name: Build and push Docker images to ECR
     needs: build-and-test
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Build backend image
-        run: docker build -t demo-demo-app .
-        working-directory: .
+      # Configurar credenciales de AWS para este job
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Build frontend image
-        run: docker build -t demo-demo-frontend ./demo-frontend
+      # Login a ECR (usa las credenciales de arriba)
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Construir imágenes locales (igual que antes)
+      - name: Build backend Docker image (local tag)
+        run: docker build -t demo-backend:ci-test .
+
+      - name: Build frontend Docker image (local tag)
+        run: docker build -t demo-frontend:ci-test ./demo-frontend
+
+      # Taggear imágenes con los nombres de ECR
+      - name: Tag backend image for ECR
+        run: |
+          docker tag demo-backend:ci-test \
+            260256918900.dkr.ecr.us-east-1.amazonaws.com/demo-backend:latest
+
+      - name: Tag frontend image for ECR
+        run: |
+          docker tag demo-frontend:ci-test \
+            260256918900.dkr.ecr.us-east-1.amazonaws.com/demo-frontend:latest
+
+      - name: Push frontend image to ECR
+        run: |
+          docker push 260256918900.dkr.ecr.us-east-1.amazonaws.com/demo-frontend:latest                      
+
+
+
+
+

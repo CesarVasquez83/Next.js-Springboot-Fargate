@@ -1,81 +1,36 @@
 # 🗂️ Task Manager — Full Stack App
 
-REST API para gestión de tareas construida con Java Spring Boot, PostgreSQL y Next.js.
-Desarrollada y probada en WSL Ubuntu con Docker.
+REST API para gestión de tareas construida con **Java Spring Boot**, **PostgreSQL** y **Next.js**.  
+Desarrollada y probada en **WSL Ubuntu** con **Docker** y **Docker Compose**.
 
 ---
 
-## 🚀 Tecnologías
+## Descripción general
 
-| Layer | Tecnología |
-|-------|-----------|
-| Backend | Java 17, Spring Boot 3.4, Hibernate ORM |
-| Database | PostgreSQL 16 (Docker) |
-| Frontend | Next.js, React, HTML/CSS/JavaScript |
-| DevOps | Docker, Docker Compose, WSL Ubuntu |
-| Testing | curl, HTTP methods |
-| Version Control | Git, GitHub |
+Proyecto demo full‑stack:
 
----
-
-## 📋 Requisitos
-
-- Java 17+
-- Docker Desktop
-- Maven o usar `./mvnw` incluido en el proyecto
+- **Backend**: Spring Boot (Java 17, Maven), API REST con endpoints:
+  - `/health`, `/health-db`
+  - CRUD de `/tasks`
+- **Base de datos**: Postgres 16 (contenedor Docker).
+- **Frontend**: Next.js (React) consumiendo la API para mostrar y gestionar tareas.
 
 ---
 
-## ▶️ Cómo correrlo
+## Requisitos
 
-### 1. Clonar el repositorio
+- Docker y Docker Compose.
+- (Opcional) JDK 17 + Maven + Node 20, si quieres correr sin Docker.
+
+---
+
+## Levantar todo con Docker
+
+Desde la carpeta raíz del proyecto (donde está `docker-compose.yml`):
+
 ```bash
-git clone https://github.com/CesarVasquez83/spring-boot-health.git
-cd spring-boot-health
-```
+docker compose up --build
+Luego:
 
-### 2. Levantar la base de datos con Docker
-```bash
-docker compose up -d
-```
-
-### 3. Correr el backend
-```bash
-./mvnw spring-boot:run
-```
-
-### 4. Abrir el frontend
-Abrir el archivo `demo-frontend/pages/index.html` en el navegador
-
----
-
-## 🔌 Endpoints API
-
-| Método | Endpoint | Descripción |
-|--------|----------|-------------|
-| GET | `/tasks` | Listar todas las tareas |
-| POST | `/tasks` | Crear una tarea |
-| PUT | `/tasks/{id}` | Actualizar una tarea |
-| DELETE | `/tasks/{id}` | Eliminar una tarea |
-| GET | `/health-db` | Health check de la base de datos |
-
----
-
-## 🧪 Ejemplo de uso con curl
-```bash
-# Crear una tarea
-curl -i -X POST "http://localhost:8080/tasks" \
-  -H "Content-Type: application/json" \
-  -d '{"title":"Mi tarea","description":"Descripción","status":"TODO"}'
-
-# Listar tareas
-curl http://localhost:8080/tasks
-```
-
----
-
-## 👨‍💻 Autor
-
-**César Augusto Vásquez Chinchay**
-Ingeniero Electrónico | PMP® | PMI-ACP® | ITIL® 4
-[LinkedIn](https://www.linkedin.com/in/césar-augusto-vásquez-chinchay-5990a895)
+Backend: http://localhost:8080/health-db
+Frontend: http://localhost:3000

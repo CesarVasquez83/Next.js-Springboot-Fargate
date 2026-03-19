@@ -1,37 +1,49 @@
-version: "3.8"
-
 services:
-  db:
+  demo-postgres:
     image: postgres:16
     container_name: demo-postgres
     environment:
       POSTGRES_DB: demo
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: demo
+      POSTGRES_PASSWORD: demo
     ports:
       - "5432:5432"
     volumes:
       - demo_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d demo"]
+      test: ["CMD-SHELL", "pg_isready -U demo -d demo || exit 1"]
       interval: 5s
       timeout: 5s
-      retries: 5
+      retries: 10
 
-  app:
-    build: .
+  demo-app:
+    build:
+      context: .              # AQUÍ: backend es la carpeta actual (demo)
+      dockerfile: Dockerfile
     container_name: demo-app
     depends_on:
-      db:
+      demo-postgres:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/demo
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://demo-postgres:5432/demo
+      SPRING_DATASOURCE_USERNAME: demo
+      SPRING_DATASOURCE_PASSWORD: demo
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_PROFILES_ACTIVE: docker
     ports:
       - "8080:8080"
-    restart: unless-stopped
+
+  demo-frontend:
+    build:
+      context: ./demo-frontend   # AQUÍ: frontend en subcarpeta
+      dockerfile: Dockerfile
+    container_name: demo-frontend
+    depends_on:
+      - demo-app
+    environment:
+      NEXT_PUBLIC_API_URL: http://demo-app:8080
+    ports:
+      - "3000:3000"
 
 volumes:
   demo_pgdata:

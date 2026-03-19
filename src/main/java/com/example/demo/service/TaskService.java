@@ -34,9 +34,19 @@ public class TaskService {
 @Transactional
 public Task update(Long id, TaskUpdateRequest req) {
   Task t = getById(id);
-  t.setTitle(req.title);
-  t.setDescription(req.description);
-  if (req.status != null) t.setStatus(req.status);
+
+  if (req.title != null && !req.title.isBlank()) {
+    t.setTitle(req.title);
+  }
+
+  if (req.description != null) {
+    t.setDescription(req.description);
+  }
+
+  if (req.status != null) {
+    t.setStatus(req.status);
+  }
+
   return repo.save(t);
 }
 

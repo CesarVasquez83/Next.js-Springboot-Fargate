@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/demo
+    username: demo
+    password: demo
+  jpa:
+    hibernate:
+      ddl-auto: validate  # o update/create-drop, según lo que quieras para test
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

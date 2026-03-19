@@ -5,7 +5,7 @@ spring:
     password: demo
   jpa:
     hibernate:
-      ddl-auto: validate  # o update/create-drop, según lo que quieras para test
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

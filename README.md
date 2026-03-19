@@ -78,4 +78,4 @@ curl http://localhost:8080/tasks
 
 **César Augusto Vásquez Chinchay**
 Ingeniero Electrónico | PMP® | PMI-ACP® | ITIL® 4
-[LinkedIn](https://www.linkedin.com/in/cip-pmp-mba-itil-acp-césar-augusto-vásquez-chinchay-5990a895)
+[LinkedIn](https://www.linkedin.com/in/césar-augusto-vásquez-chinchay-5990a895)

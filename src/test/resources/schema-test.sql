@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS health_check (
     id BIGSERIAL PRIMARY KEY,
-    check_name VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    message VARCHAR(255),
+    created_at TIMESTAMP
 );

@@ -14,7 +14,7 @@ public class HealthCheckController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/health-db")
+    @GetMapping("/api/health-db")
     public String healthDb() {
         repository.save(new HealthCheck("OK"));
         long count = repository.count();

@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")              // ← HABILITA CORS PARA TODO EL CONTROLADOR
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/tasks")
 public class TaskController {
 
   private final TaskService service;

@@ -36,4 +36,4 @@ build/
 infra/.terraform/
 infra/terraform.tfstate
 infra/terraform.tfstate.backup
-infra/*.tfvars
+infra/*.tfvarsBOOT-INF/

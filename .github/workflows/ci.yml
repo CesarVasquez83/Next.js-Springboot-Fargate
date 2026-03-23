@@ -108,3 +108,19 @@ jobs:
       - name: Push frontend image to ECR
         run: |
           docker push 260256918900.dkr.ecr.us-east-1.amazonaws.com/demo-frontend:latest
+
+      - name: Deploy backend to ECS
+        run: |
+          aws ecs update-service \
+            --cluster demo-spring-cluster \
+            --service demo-spring-backend-service \
+            --force-new-deployment \
+            --region us-east-1
+
+      - name: Deploy frontend to ECS
+        run: |
+          aws ecs update-service \
+            --cluster demo-spring-cluster \
+            --service demo-spring-frontend-service \
+            --force-new-deployment \
+            --region us-east-1

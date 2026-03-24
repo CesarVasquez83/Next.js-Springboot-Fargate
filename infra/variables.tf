@@ -6,13 +6,13 @@ variable "project_name" {
 variable "aws_region" {
   description = "Región de AWS"
   type        = string
-  default = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "db_username" {
   description = "Usuario de la base de datos"
   type        = string
-  default = "demo"   # o el que hayas usado en RDS
+  default     = "demo" # o el que hayas usado en RDS
 }
 
 variable "db_password" {
